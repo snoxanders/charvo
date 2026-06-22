@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface RPGCardProps {
   title?: string;
@@ -10,25 +11,27 @@ interface RPGCardProps {
   info?: string;
 }
 
-export function RPGCard({ 
-  title, 
-  className = '', 
-  children, 
+export function RPGCard({
+  title,
+  className = '',
+  children,
   variant = 'default',
   icon,
   action,
-  info
+  info,
 }: RPGCardProps) {
+  const [showInfo, setShowInfo] = useState(false);
+
   const borderColors = {
     default: 'border-stone-700 hover:border-amber-600/50',
     magic: 'border-indigo-800 hover:border-indigo-500/50',
-    danger: 'border-red-900 hover:border-red-700/50'
+    danger: 'border-red-900 hover:border-red-700/50',
   };
 
   const headerColors = {
     default: 'bg-stone-900/80 border-b border-stone-800',
     magic: 'bg-indigo-950/50 border-b border-indigo-900/50',
-    danger: 'bg-red-950/30 border-b border-red-900/30'
+    danger: 'bg-red-950/30 border-b border-red-900/30',
   };
 
   return (
@@ -46,27 +49,49 @@ export function RPGCard({
             <h3 className="font-serif font-bold text-base sm:text-lg text-amber-500 tracking-wide uppercase text-shadow-sm truncate">
               {title}
             </h3>
-            
-            {/* Info Tooltip */}
+
             {info && (
-              <div className="relative group/info ml-2 z-50">
-                <div className="cursor-help text-stone-500 hover:text-amber-400 hover:border-amber-400 border border-stone-600 rounded-full w-5 h-5 flex items-center justify-center text-xs font-serif font-bold italic transition-colors">
-                  i
-                </div>
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-black/95 border border-amber-600/30 rounded-lg shadow-xl text-xs text-stone-300 opacity-0 group-hover/info:opacity-100 transition-opacity pointer-events-none text-center backdrop-blur-sm">
-                  {info}
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-black/95"></div>
-                </div>
-              </div>
+              <button
+                type="button"
+                onClick={() => setShowInfo(true)}
+                aria-label="Mais informações"
+                className="ml-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border border-stone-600 text-xs font-serif font-bold italic text-stone-500 transition-colors active:border-amber-400 active:text-amber-400"
+              >
+                i
+              </button>
             )}
           </div>
-          {action && <div>{action}</div>}
+          {action && <div className="flex-shrink-0">{action}</div>}
         </div>
       )}
-      
+
       <div className="p-3 sm:p-4 relative">
         {children}
       </div>
+
+      {/* Popover de info — fixo e centralizado (nunca sai da tela) */}
+      {info && showInfo && createPortal(
+        <div
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/70 p-6 backdrop-blur-sm"
+          onClick={() => setShowInfo(false)}
+        >
+          <div
+            className="w-full max-w-xs rounded-2xl border border-amber-600/30 bg-stone-900 p-5 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {title && <h4 className="mb-2 font-serif text-sm font-bold uppercase tracking-wide text-amber-500">{title}</h4>}
+            <p className="text-sm leading-relaxed text-stone-300">{info}</p>
+            <button
+              type="button"
+              onClick={() => setShowInfo(false)}
+              className="mt-4 w-full rounded-xl bg-stone-800 py-2.5 text-sm font-semibold text-stone-200 active:bg-stone-700"
+            >
+              Entendi
+            </button>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

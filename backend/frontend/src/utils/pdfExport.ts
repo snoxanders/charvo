@@ -1,7 +1,8 @@
 import { jsPDF } from 'jspdf';
 import { Character } from '../components/CharacterSheet';
+import { Capacitor } from '@capacitor/core';
 
-export const generatePDF = (character: Character) => {
+export const generatePDF = async (character: Character) => {
     const doc = new jsPDF();
     doc.setFont("helvetica");
     
@@ -118,7 +119,24 @@ export const generatePDF = (character: Character) => {
     y += 6;
     doc.text(`Defeito: ${character.personality.flaws[0]}`, 20, y);
 
-    doc.save(`${character.name.replace(/\s+/g, '_')}_Charvo.pdf`);
+    const fileName = `${character.name.replace(/\s+/g, '_')}_Charvo.pdf`;
+
+    if (Capacitor.isNativePlatform()) {
+        // No app nativo o download do navegador não funciona: salva no Cache e abre o compartilhamento.
+        try {
+            const { Filesystem, Directory } = await import('@capacitor/filesystem');
+            const { Share } = await import('@capacitor/share');
+            const base64 = doc.output('datauristring').split(',')[1];
+            await Filesystem.writeFile({ path: fileName, data: base64, directory: Directory.Cache });
+            const { uri } = await Filesystem.getUri({ path: fileName, directory: Directory.Cache });
+            await Share.share({ title: character.name, text: `Ficha de ${character.name} — Charvo`, url: uri });
+        } catch (e) {
+            console.error('Erro ao exportar PDF:', e);
+            alert('Não foi possível exportar o PDF.');
+        }
+    } else {
+        doc.save(fileName);
+    }
 };
 
 
