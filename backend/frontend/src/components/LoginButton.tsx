@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { LogIn, LogOut, User as UserIcon, X, Mail } from 'lucide-react';
 
@@ -54,9 +55,9 @@ export const LoginButton = () => {
                 <LogIn size={16} /> Entrar
             </button>
 
-            {isOpen && (
-                <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-                    <div className="bg-slate-800 p-6 rounded-lg w-full max-w-sm border border-slate-700 shadow-2xl relative animate-fade-in">
+            {isOpen && createPortal(
+                <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[100] p-4 backdrop-blur-sm overflow-y-auto">
+                    <div className="bg-slate-800 p-6 rounded-lg w-full max-w-sm border border-slate-700 shadow-2xl relative animate-fade-in my-auto">
                         <button 
                             onClick={() => { setIsOpen(false); setSent(false); }} 
                             className="absolute top-4 right-4 text-slate-400 hover:text-white transition"
@@ -112,7 +113,8 @@ export const LoginButton = () => {
                             </form>
                         )}
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </>
     );

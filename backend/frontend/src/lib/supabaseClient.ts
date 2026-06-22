@@ -6,7 +6,15 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
 }
 
 export const supabase = createClient(
-    SUPABASE_URL, 
-    SUPABASE_ANON_KEY
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY,
+    {
+        auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true, // captura a sessão do link mágico ao retornar ao site
+            // fluxo implícito (padrão): tolera abrir o link mágico em outro navegador
+        },
+    }
 );
 
