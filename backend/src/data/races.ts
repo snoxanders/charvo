@@ -40,15 +40,15 @@ export const RACES: Race[] = [
   },
   {
     id: 'elf-drow',
-    name: 'Elfo Negro (Drow)',
-    subrace: 'Drow',
+    name: 'Elfo Sombrio',
+    subrace: 'Sombrio',
     speed: 30,
     size: 'Medium',
     abilityBonuses: { DEX: 2, CHA: 1 },
     traits: [
       { name: 'Visão no Escuro Superior', description: 'Sua visão no escuro tem alcance de 36 metros (120 pés).' },
       { name: 'Sensibilidade à Luz Solar', description: 'Você tem desvantagem nas jogadas de ataque e testes de Sabedoria (Percepção) relacionados à visão quando você ou o alvo do seu ataque ou o que você está tentando perceber está sob luz solar direta.' },
-      { name: 'Magia Drow', description: 'Você conhece o truque luzes dançantes.' }
+      { name: 'Magia das Sombras', description: 'Você conhece um truque mágico menor de luz ligado à sua linhagem sombria.' }
     ],
     languages: ['Comum', 'Élfico']
   },

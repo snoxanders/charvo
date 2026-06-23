@@ -1,6 +1,7 @@
 import { Shield, Heart, Zap, RefreshCw, Save, Download } from 'lucide-react';
 import { Character } from '../../types/character';
 import { StatShield } from '../ui/StatDisplay';
+import { RaceAvatar } from '../ui/RaceAvatar';
 
 interface SheetHeaderProps {
   character: Character;
@@ -10,18 +11,6 @@ interface SheetHeaderProps {
 }
 
 export function SheetHeader({ character, onReroll, onSave, onExportPDF }: SheetHeaderProps) {
-  const getAvatarUrl = (raceName: string) => {
-    const raceMap: { [key: string]: string } = {
-      'Humano': 'human', 'Alto Elfo': 'elf', 'Elfo da Floresta': 'wood-elf', 'Elfo Negro (Drow)': 'drow',
-      'Anão da Colina': 'dwarf', 'Anão da Montanha': 'dwarf', 'Halfling': 'halfling',
-      'Halfling Pés-Leves': 'halfling-lightfoot', 'Halfling Robusto': 'halfling-stout', 'Meio-Orc': 'orc',
-      'Tiefling': 'tiefling', 'Gnomo das Rochas': 'gnome', 'Gnomo da Floresta': 'forest-gnome',
-      'Meio-Elfo': 'half-elf', 'Draconato': 'dragonborn',
-    };
-    const fileName = raceMap[raceName];
-    return fileName ? `/assets/races/${fileName}.png` : `https://api.dicebear.com/7.x/adventurer/svg?seed=${raceName}-${character.name}`;
-  };
-
   const rerollBtn = "flex items-center gap-1 rounded-lg border border-stone-700 bg-stone-900/80 px-2.5 py-1.5 text-xs font-semibold text-stone-300 active:scale-95 active:border-amber-600 transition";
 
   return (
@@ -34,7 +23,7 @@ export function SheetHeader({ character, onReroll, onSave, onExportPDF }: SheetH
         <div className="flex items-center gap-4">
           <div className="relative flex-shrink-0">
             <div className="h-24 w-20 overflow-hidden rounded-xl border-2 border-stone-700 bg-stone-900 shadow-lg">
-              <img src={getAvatarUrl(character.race.name)} alt={character.race.name} className="h-full w-full object-cover object-top" />
+              <RaceAvatar name={character.race.name} size="lg" />
             </div>
             <div className="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full border-2 border-stone-950 bg-amber-600 text-sm font-bold text-white shadow-lg">
               {character.level}

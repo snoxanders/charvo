@@ -20,140 +20,122 @@ export const BACKGROUNDS: BackgroundData[] = [
     {
         id: 'acolyte',
         name: 'Acólito',
-        description: 'Você viveu a serviço de um templo de algum deus especifico ou de um panteão de deuses.',
+        description: 'Você dedicou parte da vida a um templo, ordem ou tradição espiritual, aprendendo seus ritos e cuidando dos fiéis.',
         feature: {
-            name: 'Abrigo dos Fiéis',
-            description: 'Você e seus companheiros podem receber cura e caridade de um templo de sua fé.'
+            name: 'Acolhida nos Templos',
+            description: 'Em templos e santuários da sua fé, você e seus aliados costumam conseguir abrigo, cura simples e apoio dos devotos.'
         },
         skillProficiencies: ['Intuição', 'Religião'],
         toolProficiencies: [],
         languages: 2,
-        equipment: ['Símbolo sagrado', 'Livro de preces ou conta de orações', '5 varetas de incenso', 'Vestimentas', 'Roupas comuns', '15 po'],
+        equipment: ['Símbolo de fé', 'Livro de orações', 'Incenso', 'Vestes cerimoniais', 'Roupas comuns', '15 po'],
         personalityTraits: [
-            'Eu idolatro um herói particular da minha fé, e constantemente me refiro a seus feitos e exemplos.',
-            'Eu consigo encontrar semelhanças mesmo entre os inimigos mais violentos.',
-            'Eu vejo presságios em cada evento e ação.',
-            'Nada pode abalar minha atitude otimista.',
-            'Eu cito textos sagrados e provérbios em quase qualquer situação.',
-            'Eu sou tolerante (ou intolerante) a qualquer outra fé.',
-            'Eu aprecio comida requintada, bebidas e a elite do meu templo.',
-            'Eu passei tanto tempo no templo que possuo pouca prática em lidar com as pessoas.'
+            'Trago sempre uma lição ou parábola da minha fé para cada situação.',
+            'Mantenho a calma e a esperança mesmo nos piores momentos.',
+            'Procuro o bem até em quem parece irrecuperável.',
+            'Sou meticuloso com rituais, horários e tradições.',
+            'Falo pouco do mundo lá fora — passei a vida entre orações.'
         ],
         ideals: [
-            { text: 'Tradição. As tradições ancestrais devem ser preservadas.', align: 'Leal' },
-            { text: 'Caridade. Eu sempre tento ajudar aqueles em necessidade.', align: 'Bom' },
-            { text: 'Mudança. Nós devemos ajudar a conduzir as mudanças divinas.', align: 'Caótico' },
-            { text: 'Poder. Eu espero chegar ao topo na hierarquia.', align: 'Leal' },
-            { text: 'Fé. Eu acredito que minha divindade guia minhas ações.', align: 'Leal' },
-            { text: 'Aspiração. Eu busco ser digno da graça do meu deus.', align: 'Qualquer' }
+            { text: 'Compaixão. Ajudar quem sofre é meu maior dever.', align: 'Bom' },
+            { text: 'Tradição. Os ritos antigos guardam sabedoria e devem ser honrados.', align: 'Leal' },
+            { text: 'Renovação. A fé precisa evoluir com o tempo.', align: 'Caótico' },
+            { text: 'Convicção. Minha crença guia cada passo que dou.', align: 'Leal' },
+            { text: 'Mérito. Quero me provar digno daquilo em que acredito.', align: 'Qualquer' }
         ],
         bonds: [
-            'Eu morreria para recuperar uma relíquia ancestral de minha fé.',
-            'Eu ainda terei minha vingança contra o templo corrupto que me acusou.',
-            'Eu devo minha vida ao sacerdote que me acolheu.',
-            'Tudo o que faço, faço pelo povo.',
-            'Eu farei qualquer coisa para proteger o templo que sirvo.',
-            'Eu busco guardar um texto sagrado que meus inimigos tentam destruir.'
+            'Protejo uma relíquia sagrada com a minha própria vida.',
+            'Devo tudo ao mentor que me acolheu quando eu não tinha nada.',
+            'Minha missão é levar conforto a quem está perdido.',
+            'Um templo me traiu, e busco justiça por isso.',
+            'Guardo um texto antigo que outros querem destruir.'
         ],
         flaws: [
-            'Eu julgo os outros severamente, e a mim mesmo mais ainda.',
-            'Eu deposito muita confiança naqueles que detêm o poder na hierarquia.',
-            'Minha devoção muitas vezes me cega.',
-            'Meu pensamento é inflexível.',
-            'Eu suspeito de estranhos e sempre espero o pior deles.',
-            'Depois de escolher um objetivo, fico obcecado em cumpri-lo.'
+            'Sou duro demais ao julgar — comigo, ainda mais.',
+            'Minha fé às vezes me cega para a verdade.',
+            'Confio cegamente em quem tem autoridade.',
+            'Custo a mudar de ideia, mesmo quando estou errado.',
+            'Desconfio de estranhos por princípio.'
         ]
     },
     {
         id: 'criminal',
         name: 'Criminoso',
-        description: 'Você é um criminoso experiente com um histórico de contravenções.',
+        description: 'Você viveu à margem da lei — golpes, furtos e acordos nas sombras moldaram quem você é.',
         feature: {
-            name: 'Contato Criminal',
-            description: 'Você possui contatos de confiança que agem como seus informantes em uma rede criminosa.'
+            name: 'Rede nas Sombras',
+            description: 'Você conhece gente do submundo que pode passar recados, informações e pequenos favores — por um preço.'
         },
         skillProficiencies: ['Enganação', 'Furtividade'],
         toolProficiencies: ['Kit de jogo', 'Ferramentas de ladrão'],
-        equipment: ['Pé de cabra', 'Roupas escuras com capuz', '15 po'],
+        equipment: ['Pé de cabra', 'Capa escura com capuz', '15 po'],
         personalityTraits: [
-            'Eu sempre tenho um plano para quando as coisas dão errado.',
-            'Eu estou sempre calmo, não importa a situação.',
-            'A primeira coisa que faço ao chegar a um novo local é decorar a localização de coisas valiosas.',
-            'Eu prefiro fazer um novo amigo a um novo inimigo.',
-            'Eu sou incrivelmente receoso em confiar.',
-            'Eu não presto atenção aos riscos envolvidos em uma situação.',
-            'A melhor maneira de me levar a fazer algo é dizendo que eu não posso fazer.',
-            'Eu explodo ao menor insulto.'
+            'Sempre tenho um plano B (e um C) engatilhado.',
+            'Mantenho o sangue-frio quando tudo desaba ao redor.',
+            'Reparo no que vale a pena assim que entro em qualquer lugar.',
+            'Levo tempo para confiar em alguém.',
+            'Um bom desafio me faz esquecer todos os riscos.'
         ],
         ideals: [
-            { text: 'Honra. Eu não roubo de irmãos de profissão.', align: 'Leal' },
-            { text: 'Liberdade. Correntes foram feitas para serem partidas.', align: 'Caótico' },
-            { text: 'Caridade. Eu roubo dos ricos para dar aos que precisam.', align: 'Bom' },
-            { text: 'Ganância. Eu farei qualquer coisa para me tornar rico.', align: 'Mal' },
-            { text: 'Povo. Eu sou leal aos meus amigos, não a qualquer ideal.', align: 'Neutro' },
-            { text: 'Redenção. Há uma centelha de bondade em todo mundo.', align: 'Bom' }
+            { text: 'Código. Não passo a perna em quem é da minha laia.', align: 'Leal' },
+            { text: 'Liberdade. Ninguém manda em mim.', align: 'Caótico' },
+            { text: 'Justiça torta. Tiro dos poderosos para ajudar os esquecidos.', align: 'Bom' },
+            { text: 'Cobiça. Faço o que for preciso por riqueza.', align: 'Mal' },
+            { text: 'Lealdade. Sou fiel aos meus, não a ideais.', align: 'Neutro' }
         ],
         bonds: [
-            'Eu estou tentando quitar uma dívida que tenho com um benfeitor.',
-            'Meus ganhos são para sustentar minha família.',
-            'Algo importante foi roubado de mim, e eu vou recuperá-lo.',
-            'Eu me tornarei o maior ladrão que já existiu.',
-            'Eu sou culpado por um terrível crime e espero me redimir.',
-            'Alguém que amo morreu por causa de um erro que cometi.'
+            'Devo um favor pesado a alguém perigoso.',
+            'Tudo o que faço é para sustentar minha família.',
+            'Roubaram algo meu, e vou recuperar.',
+            'Quero deixar minha marca como uma lenda do crime.',
+            'Carrego a culpa de um erro que custou caro a alguém.'
         ],
         flaws: [
-            'Quando vejo algo valioso, não consigo pensar em mais nada além de roubá-lo.',
-            'Quando confrontado entre dinheiro e amigo, escolho o dinheiro.',
-            'Se há um plano, eu vou esquecê-lo ou ignorá-lo.',
-            'Eu tenho um "tique" que revela se estou mentindo.',
-            'Eu viro as costas e corro quando as coisas começam a ficar ruins.',
-            'Um inocente foi preso por um crime que cometi. Por mim tudo bem.'
+            'Não resisto a um alvo fácil e valioso.',
+            'Entre o dinheiro e um aliado, costumo escolher o dinheiro.',
+            'Improviso tanto que ignoro os planos combinados.',
+            'Fujo quando o couro começa a comer.',
+            'Tenho um cacoete que me entrega quando minto.'
         ]
     },
     {
         id: 'folk_hero',
         name: 'Herói do Povo',
-        description: 'Você veio de uma parcela humilde da sociedade, mas está destinado a muito mais.',
+        description: 'Você nasceu humilde, mas um ato de coragem fez o povo enxergar em você algo maior.',
         feature: {
-            name: 'Hospitalidade Rústica',
-            description: 'Você pode encontrar lugar entre os camponeses para se esconder ou descansar.'
+            name: 'Hospitalidade do Campo',
+            description: 'Gente simples reconhece sua boa fama e oferece comida, descanso e até esconderijo quando você precisa.'
         },
         skillProficiencies: ['Adestrar Animais', 'Sobrevivência'],
         toolProficiencies: ['Ferramentas de artesão', 'Veículos terrestres'],
-        equipment: ['Ferramentas de artesão', 'Pá', 'Pote de ferro', 'Roupas comuns', '10 po'],
+        equipment: ['Ferramentas de artesão', 'Pá', 'Panela de ferro', 'Roupas comuns', '10 po'],
         personalityTraits: [
-            'Eu julgo as pessoas por suas ações, não por suas palavras.',
-            'Se alguém está em apuros, eu estou sempre pronto para ajudar.',
-            'Quando eu fixo minha mente em algo, eu sigo esse caminho.',
-            'Eu possuo um forte senso de justiça.',
-            'Eu confio em minhas habilidades.',
-            'Pensar é para os outros, eu prefiro agir.',
-            'Eu abuso de palavras longas na tentativa de soar inteligente.',
-            'Eu me entedio fácil.'
+            'Julgo as pessoas pelo que fazem, não pelo que falam.',
+            'Quando vejo alguém em apuros, não consigo passar reto.',
+            'Quando decido algo, vou até o fim.',
+            'Prefiro agir a ficar matutando.',
+            'Tenho um senso de justiça que não me deixa em paz.'
         ],
         ideals: [
-            { text: 'Respeito. As pessoas merecem ser tratadas com dignidade.', align: 'Bom' },
-            { text: 'Justiça. Ninguém deve estar acima da lei.', align: 'Leal' },
-            { text: 'Liberdade. Tiranos não devem oprimir o povo.', align: 'Caótico' },
-            { text: 'Força. Se eu ficar forte, posso pegar o que quiser.', align: 'Mal' },
-            { text: 'Sinceridade. Não há nada de bom em fingir.', align: 'Neutro' },
-            { text: 'Destino. Nada pode me manter longe do meu chamado.', align: 'Qualquer' }
+            { text: 'Dignidade. Todo mundo merece respeito.', align: 'Bom' },
+            { text: 'Justiça. Ninguém está acima do que é certo.', align: 'Leal' },
+            { text: 'Liberdade. Tiranos não vão pisar no povo enquanto eu viver.', align: 'Caótico' },
+            { text: 'Poder. Sendo forte, pego o que eu quiser.', align: 'Mal' },
+            { text: 'Chamado. Nada me afasta do meu destino.', align: 'Qualquer' }
         ],
         bonds: [
-            'Eu tenho uma família, mas não tenho ideia de onde eles estão.',
-            'Eu trabalhei na terra, eu amo a terra, e vou proteger a terra.',
-            'Um nobre orgulhoso certa vez me surrou, e eu vou me vingar.',
-            'Minhas ferramentas são símbolos de minha vida passada.',
-            'Eu protejo aqueles que não podem se proteger.',
-            'Eu queria que meu amor de infância tivesse vindo comigo.'
+            'Defendo a terra e a gente de onde vim.',
+            'Protejo quem não consegue se proteger.',
+            'Tenho contas a acertar com um nobre cruel.',
+            'Minhas ferramentas lembram quem eu era antes de tudo isso.',
+            'Perdi minha família e um dia vou reencontrá-la.'
         ],
         flaws: [
-            'O tirano que governa minha terra não vai parar até ver meu cadáver.',
-            'Eu estou convencido do significado do meu destino.',
-            'Eu tenho uma fraqueza pelos vícios da cidade.',
-            'Eu tenho um ódio secreto por dragões.',
-            'Eu tenho medo de falhar com aqueles que acreditam em mim.',
-            'Eu não consigo resistir a desafiar alguém mais forte que eu.'
+            'Tenho certeza absoluta do meu destino — até demais.',
+            'Caio fácil nas tentações da cidade grande.',
+            'Não recuso um desafio, mesmo contra quem é mais forte.',
+            'Morro de medo de decepcionar quem confia em mim.',
+            'Ajo antes de pensar nas consequências.'
         ]
     },
     {

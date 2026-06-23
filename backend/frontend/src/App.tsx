@@ -1,11 +1,13 @@
 import { useState, useEffect, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import axios from 'axios';
-import { Dice5, RefreshCw, Users, Plus, SlidersHorizontal, Download, Trash2, ScrollText } from 'lucide-react';
+import { Dice5, RefreshCw, Users, Plus, SlidersHorizontal, Download, Trash2, ScrollText, Info } from 'lucide-react';
 import { App as CapApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LoginButton } from './components/LoginButton';
 import { CharacterSheet, Character } from './components/CharacterSheet';
+import { RaceAvatar } from './components/ui/RaceAvatar';
 import { generatePDF } from './utils/pdfExport';
 
 function CharvoApp() {
@@ -15,6 +17,7 @@ function CharvoApp() {
   const [character, setCharacter] = useState<Character | null>(null);
   const [savedCharacters, setSavedCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [selectedRace, setSelectedRace] = useState('');
@@ -26,7 +29,7 @@ function CharvoApp() {
 
   const racesList = [
     { id: 'human', name: 'Humano' }, { id: 'elf-high', name: 'Alto Elfo' },
-    { id: 'elf-wood', name: 'Elfo da Floresta' }, { id: 'elf-drow', name: 'Elfo Negro (Drow)' },
+    { id: 'elf-wood', name: 'Elfo da Floresta' }, { id: 'elf-drow', name: 'Elfo Sombrio' },
     { id: 'dwarf-hill', name: 'Anão da Colina' }, { id: 'dwarf-mountain', name: 'Anão da Montanha' },
     { id: 'halfling-lightfoot', name: 'Halfling Pés-Leves' }, { id: 'halfling-stout', name: 'Halfling Robusto' },
     { id: 'half-orc', name: 'Meio-Orc' }, { id: 'tiefling', name: 'Tiefling' },
@@ -109,17 +112,6 @@ function CharvoApp() {
   const handleLoad = (char: Character) => { setCharacter(char); setActiveTab('generator'); };
   const handleExportPDF = (char: Character = character!) => { if (char) generatePDF(char); };
 
-  const getAvatarUrl = (raceName: string, charName: string) => {
-    const raceMap: { [key: string]: string } = {
-      'Humano': 'human', 'Alto Elfo': 'elf', 'Elfo da Floresta': 'wood-elf', 'Elfo Negro (Drow)': 'drow',
-      'Anão da Colina': 'dwarf', 'Anão da Montanha': 'dwarf', 'Halfling Pés-Leves': 'halfling-lightfoot',
-      'Halfling Robusto': 'halfling-stout', 'Halfling': 'halfling', 'Meio-Orc': 'orc', 'Tiefling': 'tiefling',
-      'Gnomo das Rochas': 'gnome', 'Gnomo da Floresta': 'forest-gnome', 'Meio-Elfo': 'half-elf', 'Draconato': 'dragonborn',
-    };
-    const f = raceMap[raceName];
-    return f ? `/assets/races/${f}.png` : `https://api.dicebear.com/7.x/adventurer/svg?seed=${raceName}-${charName}`;
-  };
-
   const selectCls = "w-full rounded-xl border border-stone-700 bg-stone-900 px-3 py-3 text-stone-200 outline-none focus:border-amber-600";
 
   return (
@@ -133,7 +125,10 @@ function CharvoApp() {
           >
             <Dice5 size={22} className="text-amber-600" /> Charvo
           </button>
-          <LoginButton />
+          <div className="flex items-center gap-1">
+            <button onClick={() => setShowAbout(true)} aria-label="Sobre" className="rounded-full p-2 text-stone-400 active:text-amber-500"><Info size={20} /></button>
+            <LoginButton />
+          </div>
         </div>
       </header>
 
@@ -245,7 +240,7 @@ function CharvoApp() {
                   >
                     <div className="flex items-center gap-3">
                       <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl border border-stone-700 bg-stone-950">
-                        <img src={getAvatarUrl(char.race.name, char.name)} alt="" className="h-full w-full object-cover object-top" />
+                        <RaceAvatar name={char.race.name} size="sm" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <h3 className="truncate font-serif text-lg font-bold text-stone-200">{char.name}</h3>
@@ -275,6 +270,35 @@ function CharvoApp() {
           <TabButton active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon={<Users size={22} />} label="Grimório" badge={savedCharacters.length} />
         </div>
       </nav>
+
+      {showAbout && createPortal(
+        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/75 p-5 backdrop-blur-sm" onClick={() => setShowAbout(false)}>
+          <div className="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-2xl border border-stone-700 bg-stone-900 p-5 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-3 flex items-center gap-2 font-serif text-xl font-bold text-amber-500">
+              <Dice5 size={22} className="text-amber-600" /> Charvo
+            </div>
+            <p className="text-sm leading-relaxed text-stone-300">
+              Gerador de fichas de personagem para o RPG de mesa de fantasia mais popular do mundo (compatível com a 5ª edição). Clique e tenha um herói pronto pra jogar.
+            </p>
+
+            <h4 className="mt-5 text-xs font-bold uppercase tracking-widest text-stone-500">Créditos & Licenças</h4>
+            <p className="mt-2 text-xs leading-relaxed text-stone-400">
+              Regras derivadas do <span className="text-stone-300">System Reference Document 5.1</span>, © Wizards of the Coast LLC, disponibilizado sob a licença <span className="text-stone-300">Creative Commons Attribution 4.0 (CC BY 4.0)</span>.
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-stone-400">
+              Fontes: Cinzel, Inter e Libre Baskerville (SIL Open Font License). Ícones: Lucide (ISC).
+            </p>
+
+            <h4 className="mt-5 text-xs font-bold uppercase tracking-widest text-stone-500">Aviso</h4>
+            <p className="mt-2 text-xs leading-relaxed text-stone-400">
+              Charvo é um produto independente e <span className="text-stone-300">não é afiliado, licenciado nem endossado</span> pela Wizards of the Coast. "Dungeons & Dragons" e "D&D" são marcas registradas de seus respectivos donos.
+            </p>
+
+            <button onClick={() => setShowAbout(false)} className="mt-5 w-full rounded-xl bg-stone-800 py-2.5 text-sm font-semibold text-stone-200 active:bg-stone-700">Fechar</button>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
